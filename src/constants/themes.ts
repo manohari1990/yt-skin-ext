@@ -5,6 +5,8 @@ export const defaultThemes: YouTubeTheme[] = [
     id: "cloud",
     name: "Cloud",
 
+    backgroundType:'color',
+
     NavHeaderBgColor: "#64748B",
     NavHeaderTextColor: "#fff",
     NavHeaderHoverColor: "#354762",
@@ -30,6 +32,7 @@ export const defaultThemes: YouTubeTheme[] = [
   {
     id: "ocean",
     name: "Ocean",
+    backgroundType:'color',
 
     NavHeaderBgColor: "#06B6D4",
     NavHeaderTextColor: "#fff",
@@ -55,6 +58,7 @@ export const defaultThemes: YouTubeTheme[] = [
   {
     id: "mint",
     name: "Mint",
+    backgroundType:'color',
 
     NavHeaderBgColor: "#16A34A",
     NavHeaderHoverColor:"#027925",
@@ -79,6 +83,7 @@ export const defaultThemes: YouTubeTheme[] = [
   {
     id: "lavender",
     name: "Lavender",
+    backgroundType:'color',
 
     NavHeaderBgColor: "#8158c8",
     NavHeaderTextColor: "#fff",
@@ -103,6 +108,7 @@ export const defaultThemes: YouTubeTheme[] = [
   {
     id: "rose",
     name: "Rose",
+    backgroundType:'color',
 
     NavHeaderBgColor: "#F7879A",
     NavHeaderTextColor: "#fff",
@@ -127,6 +133,7 @@ export const defaultThemes: YouTubeTheme[] = [
   {
     id: "sunset",
     name: "Sunset",
+    backgroundType:'color',
 
     NavHeaderBgColor: "#F97316", //ffdec8
     NavHeaderTextColor: "#fff", //F97316
@@ -150,6 +157,7 @@ export const defaultThemes: YouTubeTheme[] = [
   // {
   //   id: "summer",
   //   name: "Summer",
+  // backgroundType:'color',
 
   //   NavHeaderBgColor: "#ffdec8",
   //   NavHeaderTextColor: "#F97316",

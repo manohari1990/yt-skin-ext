@@ -18,14 +18,24 @@ document.head.appendChild(style);
 
 function applyTheme(theme){
     let styles = document.getElementById(STYLE_ID);
+    const backgroundStyle = theme.backgroundImage
+        ? `
+            background-image: url("${theme.backgroundImage}") !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            `
+        : `
+            background: ${theme.backgroundColor} !important;
+            `;
     styles.textContent = `
         html, body, ytd-app, .expand-collapse-button{
-            background:${theme.backgroundColor} !important;
+            ${backgroundStyle}
             accent-color: ${theme.accentColor} !important;
         }
 
         ${theme.NavHeaderBgColor ? `
-            #frosted-glass, tp-yt-app-drawer, ytd-mini-guide-renderer, #masthead, button.ytSearchboxComponentSearchButton {
+            #frosted-glass, #guide-content.ytd-app, ytd-mini-guide-renderer, #masthead, button.ytSearchboxComponentSearchButton {
                 background-color: ${theme.NavHeaderBgColor} !important;
             }
             .yt-simple-endpoint:hover, #chip-shape-container .ytChipShapeActive{
@@ -42,6 +52,7 @@ function applyTheme(theme){
                 color: ${theme.NavHeaderTextColor} !important;
                 font-weight: normal;
                 border: 1px solid #ffffff3b;
+                background-color: ${theme.backgroundColor}
             }
         ` : ""}
 

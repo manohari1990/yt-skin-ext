@@ -2,6 +2,13 @@ export interface YouTubeTheme {
   id: string;
   name: string;
 
+  backgroundType?: "color" | "image";
+  backgroundImage?: string;
+
+  glassEffect?: boolean;
+  glassOpacity?: number;
+  glassBlur?: number;
+
   NavHeaderBgColor?: string;
   NavHeaderTextColor?: string;
   NavHeaderHoverColor?: string;
@@ -23,4 +30,14 @@ export interface YouTubeTheme {
   hideShorts: boolean;
   hideComments: boolean;
   transparentNavbar: boolean;
+}
+export interface BackgroundOption {
+  id: string;
+  name: string;
+  value: string;
+  textColor: string;
+  accent:string;
+  glassEffect: boolean;
+  glassOpacity: number;
+  glassBlur: number;
 }
