@@ -21,18 +21,29 @@ function applyTheme(theme){
     const backgroundStyle = theme.backgroundImage
         ? `
             background-image: url("${theme.backgroundImage}") !important;
-            background-size: cover !important;
+            background-size: contain !important;
             background-position: center !important;
-            background-repeat: no-repeat !important;
+            background-repeat: repeat !important;
             `
         : `
             background: ${theme.backgroundColor} !important;
             `;
     styles.textContent = `
-        html, body, ytd-app, .expand-collapse-button{
+        html, body, ytd-app{
             ${backgroundStyle}
             accent-color: ${theme.accentColor} !important;
         }
+        #dismissible .button-container{
+            background-color: transparent !important;
+        }
+        #dismissible .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextOutline{
+            background-color: #fff !important;
+        }
+        ${theme.backgroundImage ? `
+            #page-manager.ytd-app{
+                background-color: #ffffff80 !important;
+            }
+        ` : ""}
 
         ${theme.NavHeaderBgColor ? `
             #frosted-glass, #guide-content.ytd-app, ytd-mini-guide-renderer, #masthead, button.ytSearchboxComponentSearchButton {
