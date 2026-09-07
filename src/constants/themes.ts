@@ -1,11 +1,40 @@
 import type { YouTubeTheme } from "../types/themes";
 
+export const defaultTheme: YouTubeTheme = {
+  id: "none",
+  name: "none",
+  backgroundType: "color",
+
+  accentColor: "unset",
+  textColor: "unset",
+
+  opacity: 1,
+  blur: 0,
+  borderRadius: 0,
+
+  NavHeaderBgColor: "inherit",
+  NavHeaderTextColor: "unset",
+  NavHeaderHoverColor: "unset",
+  NavHeaderIconColor: "unset",
+  backgroundColor: "unset",
+  cardHoverBgColor: "unset",
+  cardHoverBorderRadius: 0,
+  cardHoverTextColor: "unset",
+
+  hideShorts: false,
+  hideComments: false,
+  hideRecommendations: false,
+
+  transparentNavbar: false,
+};
+
+
 export const defaultThemes: YouTubeTheme[] = [
   {
     id: "cloud",
     name: "Cloud",
 
-    backgroundType:'color',
+    backgroundType: 'color',
 
     NavHeaderBgColor: "#64748B",
     NavHeaderTextColor: "#fff",
@@ -26,13 +55,14 @@ export const defaultThemes: YouTubeTheme[] = [
 
     hideShorts: false,
     hideComments: false,
+    hideRecommendations: false,
     transparentNavbar: false,
   },
 
   {
     id: "ocean",
     name: "Ocean",
-    backgroundType:'color',
+    backgroundType: 'color',
 
     NavHeaderBgColor: "#06B6D4",
     NavHeaderTextColor: "#fff",
@@ -52,16 +82,17 @@ export const defaultThemes: YouTubeTheme[] = [
 
     hideShorts: false,
     hideComments: false,
+    hideRecommendations: false,
     transparentNavbar: true,
   },
 
   {
     id: "mint",
     name: "Mint",
-    backgroundType:'color',
+    backgroundType: 'color',
 
     NavHeaderBgColor: "#16A34A",
-    NavHeaderHoverColor:"#027925",
+    NavHeaderHoverColor: "#027925",
     NavHeaderTextColor: "#fff",
     NavHeaderIconColor: "#fff",
 
@@ -77,13 +108,14 @@ export const defaultThemes: YouTubeTheme[] = [
 
     hideShorts: false,
     hideComments: false,
+    hideRecommendations: false,
     transparentNavbar: true,
   },
 
   {
     id: "lavender",
     name: "Lavender",
-    backgroundType:'color',
+    backgroundType: 'color',
 
     NavHeaderBgColor: "#8158c8",
     NavHeaderTextColor: "#fff",
@@ -102,13 +134,14 @@ export const defaultThemes: YouTubeTheme[] = [
 
     hideShorts: false,
     hideComments: false,
+    hideRecommendations: false,
     transparentNavbar: true,
   },
 
   {
     id: "rose",
     name: "Rose",
-    backgroundType:'color',
+    backgroundType: 'color',
 
     NavHeaderBgColor: "#F7879A",
     NavHeaderTextColor: "#fff",
@@ -127,13 +160,14 @@ export const defaultThemes: YouTubeTheme[] = [
 
     hideShorts: false,
     hideComments: false,
+    hideRecommendations: false,
     transparentNavbar: true,
   },
 
   {
     id: "sunset",
     name: "Sunset",
-    backgroundType:'color',
+    backgroundType: 'color',
 
     NavHeaderBgColor: "#F97316", //ffdec8
     NavHeaderTextColor: "#fff", //F97316
@@ -152,6 +186,7 @@ export const defaultThemes: YouTubeTheme[] = [
 
     hideShorts: false,
     hideComments: false,
+    hideRecommendations: false,
     transparentNavbar: true,
   },
   // {

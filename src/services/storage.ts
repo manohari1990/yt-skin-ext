@@ -1,5 +1,5 @@
 import type { YouTubeTheme } from "../types/themes";
-import { defaultThemes } from "../constants/themes";
+import { defaultTheme } from "../constants/themes";
 
 const THEME_KEY = 'YoutubeSkin'
 
@@ -7,7 +7,7 @@ export const getTheme = async (): Promise<YouTubeTheme> => {
   const result = await chrome.storage.local.get(THEME_KEY);
   const storedTheme = result[THEME_KEY] as YouTubeTheme | undefined;
   return {
-    ...defaultThemes[0],
+    ...defaultTheme,
     ...storedTheme
   };
 };

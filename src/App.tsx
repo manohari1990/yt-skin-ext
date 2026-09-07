@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import ThemeSelector from "./components/ThemeSelector";
 // import ColorSelector from "./components/ColorSelector";
-import { defaultThemes } from "./constants/themes";
+import { defaultTheme, defaultThemes } from "./constants/themes";
 import type { BackgroundOption, YouTubeTheme } from "./types/themes";
 import { getTheme, resetTheme, saveTheme } from "./services/storage";
 import BackgroundSelector from "./components/BackgroundSelector";
 import { BackgroundOptions } from "./constants/backgrounds";
+import ContentManager from "./components/ContentManager";
 
 function App() {
-  const [theme, setTheme] = useState<YouTubeTheme>(defaultThemes[0]);
+  const [theme, setTheme] = useState<YouTubeTheme>(defaultTheme);
   const [backgroundType, setBackgroundType] = useState<"color" | "image">("color");
   // let tempTheme = {}
 
   const selectTheme = async (selectedTheme: YouTubeTheme) => {
+    console.log(selectedTheme, "======================selectedTheme")
     setTheme(selectedTheme);
     await saveTheme(selectedTheme);
   };
@@ -29,30 +31,29 @@ function App() {
     type: "color" | "image"
   ) => {
     setBackgroundType(type)
-    // updateTheme("backgroundType", type);
   };
 
 
-  // const updateTheme = async<K extends keyof YouTubeTheme>(
-  //   key: K,
-  //   value: YouTubeTheme[K]
-  // ) => {
-  //   const updatedTheme = {
-  //     ...theme,
-  //     [key]: value,
-  //   };
-  //   setTheme((prev) => {
-  //     return {
-  //       ...prev,
-  //       ...updatedTheme
-  //     }
-  //   });
-  //   await saveTheme(updatedTheme);
-  // };
+  const updateTheme = async<K extends keyof YouTubeTheme>(
+    key: K,
+    value: YouTubeTheme[K]
+  ) => {
+    const updatedTheme = {
+      ...theme,
+      [key]: value,
+    };
+    setTheme((prev) => {
+      return {
+        ...prev,
+        ...updatedTheme
+      }
+    });
+    await saveTheme(updatedTheme);
+  };
 
   const handleReset = async () => {
     await resetTheme();
-    setTheme(defaultThemes[0])
+    setTheme(defaultTheme)
   }
 
   const updateBackground = async (option: BackgroundOption) => {
@@ -121,12 +122,14 @@ function App() {
           </div>
 
           {backgroundType === "color" ? (
+            // Select Background Color
             <ThemeSelector
               themes={defaultThemes}
-              selectedTheme={theme ? theme.id : ''}
+              selectedTheme={theme ? theme.id : null}
               onSelect={selectTheme}
             />
           ) : (
+            // Select Background image 
             <BackgroundSelector
               options={BackgroundOptions}
               selected={theme && theme.id ? theme.id : ""}
@@ -134,36 +137,13 @@ function App() {
             />
           )}
         </div>
-        {/* Select Background image */}
-        {/* <BackgroundSelector 
-          options={BackgroundOptions}
-          selected={theme ? theme.id : null}
-          onSelect={selectTheme}
-        /> */}
-
         {/* Select Background Effects */}
       </div>
 
       <div className="mt-2 border-b border-slate-300 pb-3 dark:border-neutral-700">
         {/* Manage Page Content */}
-        {/* Hide Shorts */}
-
-        {/* Hide Comments */}
-
-        {/* Hide Recommendations */}
-
+        <ContentManager theme={theme} onChange={updateTheme} />
       </div>
-
-      {/* <div className="mt-6">
-        <ColorSelector
-          title="Accent"
-          options={accentOptions}
-          selected={theme.accentColor}
-          onSelect={(value) =>
-            updateTheme("accentColor", value)
-          }
-        />
-      </div> */}
 
       <div className="mt-4">
         {/* <button 

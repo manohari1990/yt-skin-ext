@@ -29,6 +29,7 @@ export interface YouTubeTheme {
 
   hideShorts: boolean;
   hideComments: boolean;
+  hideRecommendations: boolean;
   transparentNavbar: boolean;
 }
 export interface BackgroundOption {
