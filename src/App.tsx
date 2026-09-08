@@ -7,6 +7,7 @@ import { getTheme, resetTheme, saveTheme } from "./services/storage";
 import BackgroundSelector from "./components/BackgroundSelector";
 import { BackgroundOptions } from "./constants/backgrounds";
 import ContentManager from "./components/ContentManager";
+import BackgroundEffectSelector from "./components/BackgroundEffectSelector";
 
 function App() {
   const [theme, setTheme] = useState<YouTubeTheme>(defaultTheme);
@@ -67,6 +68,14 @@ function App() {
     }
     await saveTheme(tempOptions);
     setTheme(tempOptions)
+  }
+
+  const updateBackgroundEffect= async(option:any)=>{
+    console.log(option)
+    await saveTheme({
+      ...theme,
+      backgroundEffect: option
+    });
   }
 
   // const applyTheme = async() => {

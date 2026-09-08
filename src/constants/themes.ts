@@ -4,6 +4,7 @@ export const defaultTheme: YouTubeTheme = {
   id: "none",
   name: "none",
   backgroundType: "color",
+  backgroundEffect: "none",
 
   accentColor: "unset",
   textColor: "unset",

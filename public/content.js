@@ -1,48 +1,69 @@
 /*
-    - Background image or gradient
-    - Dark/light/custom themes & Sidebar colors - done
+    - Background image or gradient - Done
+    - Dark/light/custom themes & Sidebar colors - Done
     - // Video-page background
     - Card border radius
     - Font style and size
     - Accent color
-    - Hide Shorts
-    - Hide comments
-    - Hide recommendations
+    - Hide Shorts - Done
+    - Hide comments - Done
     - Compact video cards
     - Blur or glassmorphism effects
 */
 const STYLE_ID = "yt-skin-theme";
+let currentTheme = null;
+console.log(EFFECT_ID)
 const style = document.createElement("style");
 style.id = STYLE_ID
 document.head.appendChild(style);
 
-function applyTheme(theme){
-    console.log(theme,"===========================theme")
+function applyTheme(theme) {
     let styles = document.getElementById(STYLE_ID);
-    
     styles.textContent = getThemeStyles(theme)
+    applyContentSettings(theme)
+
+}
+
+function applyContentSettings(theme) {
+    if (!theme) return;
+
     if (theme.hideShorts) displayShorts("none");
     else displayShorts("");
 
-    if(theme.hideComments) displayComments("none");
+    if (theme.hideComments) displayComments("none");
     else displayComments("")
+    // Recommendations later
 }
 
-function displayShorts(value){
+function displayShorts(value) {
     const isShorts = document.querySelectorAll("ytd-rich-shelf-renderer[is-shorts]");
     isShorts.forEach((element) => {
         element.style.display = value;
     });
 }
 
-function displayComments(value){
+function displayComments(value) {
     const commentsSection = document.querySelectorAll("ytd-comments");
     commentsSection.forEach((element) => {
         element.style.display = value;
     });
 }
 
-function getThemeStyles(theme){
+function startContentObserver() {
+    if (!document.body) return;
+    const observer = new MutationObserver(() => {
+        if (!currentTheme) return;
+        applyContentSettings(currentTheme);
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+    });
+}
+
+
+function getThemeStyles(theme) {
     const backgroundStyle = theme.backgroundImage
         ? `
             background-image: url("${theme.backgroundImage}") !important;
@@ -88,77 +109,74 @@ function getThemeStyles(theme){
                 color: ${theme.NavHeaderTextColor} !important;
                 font-weight: normal;
                 border: 1px solid #ffffff3b;
-                background-color: ${theme.backgroundImage ? theme.NavHeaderBgColor : theme.backgroundColor}
+                background: ${theme.NavHeaderBgColor};
+            }
+            ytd-menu-popup-renderer{
+                background: ${theme.backgroundColor} !important;
+            }
+            ytd-menu-service-item-renderer[system-icons] .ytIconWrapperHost.ytd-menu-service-item-renderer, ytd-menu-service-item-renderer[system-icons] yt-icon.ytd-menu-service-item-renderer, .ytIconWrapperHost.ytd-menu-service-item-download-renderer, yt-icon.ytd-menu-service-item-download-renderer, .ytd-menu-service-item-renderer yt-formatted-string{
+                color: ${theme.NavHeaderBgColor} !important;
+            }
+            reel-action-bar-view-model .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextTonal, reel-action-bar-view-model .ytSpecButtonShapeWithLabelLabel, #navigation-button-down .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextTonal, #navigation-button-up .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextTonal {
+                color: ${theme.NavHeaderBgColor} !important;
             }
         ` : ""}
-
+        
         ytd-rich-item-renderer, ytd-video-renderer{
             border-radius: ${theme.borderRadius}px !important;
             accent: ${theme.accentColor} !important;
         }
         #actions-inner .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextTonal, #actions-inner .ytSpecTouchFeedbackShapeTouchResponse .ytSpecTouchFeedbackShapeFill{
-            color: ${theme.NavHeaderTextColor} !important;;
-            background-color: ${theme.backgroundImage ? theme.NavHeaderBgColor : theme.backgroundColor} !important;
+            color: ${theme.NavHeaderTextColor} !important;
+            background-color: ${theme.NavHeaderBgColor} !important;
+        }
+        
+        yt-subscribe-button-view-model .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextFilled, ytd-subscribe-button-renderer .ytSpecButtonShapeNextMono.ytSpecButtonShapeNextFilled{
+            background: ${theme.NavHeaderBgColor} !important;
+            color: ${theme.NavHeaderTextColor} !important;
         }
     `;
 
     return themeStyles;
 }
 
-// .ytSpecTouchFeedbackShapeHovered{
-//             background-color: ${theme.cardHoverBgColor} !important;
-//             border-radius: ${theme.cardHoverBorderRadius}px !important;
-//             transition: backgroun-color 0.5s ease-in-out;
-//         }
-//         .ytSpecTouchFeedbackShapeHovered + a + .ytLockupViewModelMetadata a, .ytSpecTouchFeedbackShapeHovered + a + .ytLockupViewModelMetadata .ytContentMetadataViewModelMetadataRow {
-//             color: ${theme.cardHoverTextColor} !important;
-//             transition: color 0.3s ease-in-out;
-//         }
+function applyBackgroundEffect(theme) {
+    removeBackgroundEffect();
+    if (theme.backgroundEffect === "rain") {
+        createRainEffect();
+    }
+}
 
-chrome.storage.local.get(['YoutubeSkin'], (result)=>{
-    const theme = result.YoutubeSkin
-    if(!theme) return;
-    applyTheme(theme)
-})
+function removeBackgroundEffect() {
+    document.getElementById(EFFECT_ID)?.remove();
+}
 
-chrome.storage.onChanged.addListener((changes, areaName)=>{
-    if(areaName === 'local' && changes.YoutubeSkin){
-        const newTheme = changes.YoutubeSkin.newValue
-        if (newTheme){
-            applyTheme(newTheme)
+function loadTheme() {
+    chrome.storage.local.get(["YoutubeSkin"], (result) => {
+        currentTheme = result.YoutubeSkin || null;
+        if (!currentTheme) return;
+        applyTheme(currentTheme);
+        applyContentSettings(currentTheme);
+        applyBackgroundEffect(currentTheme);
+    });
+}
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === 'local' && changes.YoutubeSkin) {
+        currentTheme = changes.YoutubeSkin.newValue
+        if (currentTheme) {
+            applyTheme(currentTheme);
+            applyContentSettings(currentTheme);
+            applyBackgroundEffect(currentTheme);
         }
         else {
             const styles = document.getElementById(STYLE_ID);
             styles.textContent = ''
+            removeBackgroundEffect()
         }
     }
-})
+});
 
-function updateBackground(){
-
-}
-
-function headerTransparency(){
-
-}
-
-function thumbnailCardStyle(){
-
-}
-
-function fontStyles(){
-
-}
-
-function hideShorts(){
-
-}
-
-function hideComments(){
-
-}
-
-function blurEffects(){
-    
-}
+loadTheme();
+startContentObserver();
 

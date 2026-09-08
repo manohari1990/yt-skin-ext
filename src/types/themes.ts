@@ -4,6 +4,7 @@ export interface YouTubeTheme {
 
   backgroundType?: "color" | "image";
   backgroundImage?: string;
+  backgroundEffect?: "none" | "rain" | "snow" | "petals";
 
   glassEffect?: boolean;
   glassOpacity?: number;

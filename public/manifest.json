@@ -15,7 +15,7 @@
       "matches": [
         "*://*.youtube.com/*"
       ],
-      "js": ["content.js"],
+      "js": ["RainDropStyles.js", "content.js"],
       "run_at": "document_idle"
     }
   ]
