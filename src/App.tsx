@@ -7,7 +7,7 @@ import { getTheme, resetTheme, saveTheme } from "./services/storage";
 import BackgroundSelector from "./components/BackgroundSelector";
 import { BackgroundOptions } from "./constants/backgrounds";
 import ContentManager from "./components/ContentManager";
-import BackgroundEffectSelector from "./components/BackgroundEffectSelector";
+// import BackgroundEffectSelector from "./components/BackgroundEffectSelector";
 
 function App() {
   const [theme, setTheme] = useState<YouTubeTheme>(defaultTheme);
@@ -62,6 +62,7 @@ function App() {
       ...theme,
       "NavHeaderTextColor": option.textColor,
       "NavHeaderBgColor": option.accent,
+      "NavHeaderHoverColor": option.accentSecondary,
       "id": option.id,
       "backgroundImage": option.value,
       "backgroundType": 'image',
@@ -70,13 +71,13 @@ function App() {
     setTheme(tempOptions)
   }
 
-  const updateBackgroundEffect= async(option:any)=>{
-    console.log(option)
-    await saveTheme({
-      ...theme,
-      backgroundEffect: option
-    });
-  }
+  // const updateBackgroundEffect= async(option:any)=>{
+  //   console.log(option)
+  //   await saveTheme({
+  //     ...theme,
+  //     backgroundEffect: option
+  //   });
+  // }
 
   // const applyTheme = async() => {
   //   saveTheme(theme)
@@ -145,6 +146,11 @@ function App() {
               onSelect={updateBackground}
             />
           )}
+          {/* <BackgroundEffectSelector
+              // options={BackgroundOptions}
+              // selected={theme && theme.id ? theme.id : ""}
+              onSelect={updateBackgroundEffect}
+            /> */}
         </div>
         {/* Select Background Effects */}
       </div>

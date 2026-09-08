@@ -38,6 +38,7 @@ export interface BackgroundOption {
   name: string;
   value: string;
   textColor: string;
+  accentSecondary: string;
   accent:string;
   glassEffect: boolean;
   glassOpacity: number;

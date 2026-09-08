@@ -64,6 +64,7 @@ function startContentObserver() {
 
 
 function getThemeStyles(theme) {
+    console.log(theme,"======================theme")
     const backgroundStyle = theme.backgroundImage
         ? `
             background-image: url("${theme.backgroundImage}") !important;
