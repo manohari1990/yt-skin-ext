@@ -35,7 +35,7 @@ export default function ContentManager({
                 <ContentToggle label="Hide Comments" enabled={theme.hideComments} onChange={(enabled)=> onChange("hideComments", enabled)} />
 
                 {/* Hide Recommendations */}
-                <ContentToggle label="Hide Recommendations" enabled={theme.hideRecommendations} onChange={(enabled)=> onChange("hideRecommendations", enabled)} />
+                {/* <ContentToggle label="Hide Recommendations" enabled={theme.hideRecommendations} onChange={(enabled)=> onChange("hideRecommendations", enabled)} /> */}
             </div>
         </div>
     )

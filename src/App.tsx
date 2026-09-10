@@ -88,7 +88,7 @@ function App() {
       id="main-modal"
       className="flex w-full flex-col p-5"
     >
-      <div className="mb-3 border-b border-slate-300 pb-3 dark:border-neutral-700">
+      <div className="mb-1 border-b border-slate-300 pb-1 dark:border-neutral-700">
         <h5 className="text-xl font-bold">
           YouTube Skin Manager
         </h5>
@@ -98,9 +98,9 @@ function App() {
         </p>
       </div>
 
-      <div className="mt-2 border-b border-slate-300 pb-3 dark:border-neutral-700">
+      <div className="border-b border-slate-300 pb-2 dark:border-neutral-700">
         {/* Select Skin Color */}
-        <div className="mt-6">
+        <div className="mt-4">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold">
               Background
@@ -155,7 +155,7 @@ function App() {
         {/* Select Background Effects */}
       </div>
 
-      <div className="mt-2 border-b border-slate-300 pb-3 dark:border-neutral-700">
+      <div className="mt-2 border-b border-slate-300 pb-2 dark:border-neutral-700">
         {/* Manage Page Content */}
         <ContentManager theme={theme} onChange={updateTheme} />
       </div>

@@ -1,0 +1,28 @@
+Theme System
+    ✓ Cloud
+    ✓ Ocean
+    ✓ Mint
+    ✓ Lavender
+    ✓ Rose
+    ✓ Sunset
+
+Background
+    ✓ Color
+    ✓ Image
+
+Content
+    ✓ Shorts
+    ✓ Comments
+    ✓ Recommendations
+
+Persistence
+    ✓ chrome.storage.local
+
+Reset
+    → ADD
+
+Polish
+    → ADD
+
+Testing
+    → DO
